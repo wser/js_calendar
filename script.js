@@ -65,21 +65,22 @@ const wCal = {
   }
 };
 
-let iDiv = document.createElement('div');
-iDiv.class = 'week_block';
+let week = document.createElement('div');
+week.className = 'week';
 
 // Create the inner div before appending to the body
 for (let i = 0; i < day.length; i++) {
-  let innerDiv = document.createElement('div');
-  innerDiv.className = `d_${currentDate}`;
-  innerDiv.innerHTML = i;
-  // The variable iDiv is still good... Just append to it.
-  iDiv.appendChild(innerDiv);
+  let day = document.createElement('div');
+  day.className = 'day';
+  day.id = `${i}`;
+  day.innerHTML = i;
+  // The variable week is still good... Just append to it.
+  week.appendChild(day);
 }
 
 window.onload = function() {
   //call calendar() when page load
   wCal.calendar();
   // Then append the whole thing onto the body
-  document.getElementsByTagName('body')[0].appendChild(iDiv);
+  document.getElementsByClassName('calendar')[0].appendChild(week);
 };

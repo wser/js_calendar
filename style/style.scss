@@ -17,22 +17,22 @@
   }
 }
 
-.frame {
+.calendar {
   max-width: 560px;
   margin: 20px auto;
 
   .week {
     display: flex;
     height: 80px;
-  }
 
-  .day {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-    color: #f98909;
-    padding: 5px;
-    background-color: transparentize(white, 0.3);
-    box-shadow: -1px -1px #f9a440, inset -1px -1px 0 0 #f9a440;
+    .day {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      color: #f98909;
+      padding: 5px;
+      background-color: transparentize(white, 0.3);
+      box-shadow: -1px -1px #f9a440, inset -1px -1px 0 0 #f9a440;
+    }
   }
 }
