@@ -1,17 +1,20 @@
-.calendar-container {
+$font-stack: Verdana, Arial, sans-serif;
+$primary-color: #4abf8a;
+
+.ccontainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-content: center;
   width: 200px;
-  background-color: #4abf8a;
+  background-color: $primary-color;
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 4px 4px 0 rgba(50, 50, 50, 0.4);
 
   & > div {
-    font-family: Verdana, Arial, sans-serif;
+    font-family: $font-stack;
     padding: 5px 5px;
     margin: 0;
   }
@@ -29,10 +32,10 @@
       flex-grow: 1;
       flex-shrink: 1;
       flex-basis: 0;
-      color: #f98909;
+      color: $primary-color;
       padding: 5px;
       background-color: transparentize(white, 0.3);
-      box-shadow: -1px -1px #f9a440, inset -1px -1px 0 0 #f9a440;
+      box-shadow: -1px -1px $primary-color, inset -1px -1px 0 0 $primary-color;
     }
   }
 }

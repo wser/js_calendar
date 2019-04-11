@@ -1,4 +1,4 @@
-.calendar-container {
+.ccontainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,7 +21,7 @@
           box-shadow: 0 4px 4px 0 rgba(50, 50, 50, 0.4);
 }
 
-.calendar-container > div {
+.ccontainer > div {
   font-family: Verdana, Arial, sans-serif;
   padding: 5px 5px;
   margin: 0;
@@ -47,10 +47,10 @@
       flex-shrink: 1;
   -ms-flex-preferred-size: 0;
       flex-basis: 0;
-  color: #f98909;
+  color: #4abf8a;
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.7);
-  -webkit-box-shadow: -1px -1px #f9a440, inset -1px -1px 0 0 #f9a440;
-          box-shadow: -1px -1px #f9a440, inset -1px -1px 0 0 #f9a440;
+  -webkit-box-shadow: -1px -1px #4abf8a, inset -1px -1px 0 0 #4abf8a;
+          box-shadow: -1px -1px #4abf8a, inset -1px -1px 0 0 #4abf8a;
 }
 /*# sourceMappingURL=style.css.map */
