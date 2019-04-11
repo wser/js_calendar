@@ -39,7 +39,7 @@
   height: 80px;
 }
 
-.calendar .week .day {
+.calendar .week .cell {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
