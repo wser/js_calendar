@@ -23,58 +23,17 @@ const months = [
   'December'
 ];
 
-Date.prototype.getWeekNumber = function() {
-  let d = new Date(
-    Date.UTC(this.getFullYear(), this.getMonth(), this.getDate())
-  );
-  let dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+const getWeekNumber = function(d) {
+  // Copy date so don't modify original
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  // Get first day of year
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
   return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
 };
-
-Date.prototype.getMonday = function() {
-  let d = new Date(
-    Date.UTC(this.getFullYear(), this.getMonth(), this.getDate())
-  );
-  let day = d.getDay() || 7; // Get current day number, converting Sun. to 7
-  // Only manipulate the d if it isn't Mon.
-  if (day !== 1) d.setHours(-24 * (day - 1)); // Set the hours to day number minus 1
-  return d; // will be Monday
-};
-
-let ccontainer = document.createElement('div');
-ccontainer.className = 'ccontainer';
-//this function will set the text value for a tags;
-function domText(id, val) {
-  let item = document.createElement('div');
-  item.id = id;
-  item.innerHTML = val;
-  ccontainer.appendChild(item);
-}
-
-// let yv = 2019,
-//   mv = 5,
-//   dv = 1;
-
-// let dt = `${yv}, ${mv}, ${dv}`;
-// // let dt = new Date();
-
-// let d = new Date(dt);
-// let y = d.getFullYear();
-// let m = d.getMonth();
-
-// let dayInWeek = weekdays[d.getDay()]; //string
-// let monthName = months[m];
-// let weeknum = parseInt(d.getWeekNumber()); //int // get week from date
-// let monday = parseInt(d.getMonday().getDate()); //int
-// let monMonth = parseInt(d.getMonday().getMonth() + 1); //int
-// let year = parseInt(1900 + d.getYear()); //int
-// let firstInYearDate = new Date(y, 0, 1);
-// let currentDate = d.toLocaleDateString(localeStr); //string
-// let firstMDay = new Date(y, m, 1).getDate();
-// let eoThisMonth = parseInt(new Date(y, m + 1, 0).getDate()); //int
-// let eoPrevMonth = parseInt(new Date(y, m, 0).getDate()); //int
 
 const mondayFromWeekNumber = function(week, y) {
   // sets default year to current if undefined
@@ -98,22 +57,8 @@ const mondayFromWeekNumber = function(week, y) {
   return new Date(fyD.getTime() + noOfWeeks - days);
 };
 
-// console.log(parseInt(mondayFromWeekNumber(1).getDate()));
-
 const wCal = {
-  // calendarHelp() {
-  //   domText('fulldate', 'fulldate: ' + currentDate);
-  //   domText('weekday', 'weekday: ' + dayInWeek);
-  //   domText('weeknum', 'weeknum: ' + weeknum);
-  //   domText('monday', 'monday: ' + monday + '.' + monMonth);
-  //   domText('month', 'month: ' + monthName);
-  //   domText('eoThisMonth', 'end of month: ' + eoThisMonth);
-  //   domText('eoprevmonth', 'end of  prev month: ' + eoPrevMonth);
-  //   domText('year', 'year: ' + year);
-  //   //append to DOM div
-  //   document.getElementsByClassName('calendarHelp')[0].appendChild(ccontainer);
-  // },
-  createWeek() {
+  createCal() {
     for (let j = 0; j < 5; j++) {
       let x = mondayFromWeekNumber(j + 1, 2019);
 
@@ -131,10 +76,13 @@ const wCal = {
         let xd = new Date(x.getFullYear(), x.getMonth(), x.getDate() + i - 1);
         let xxd = xd.toLocaleDateString(localeStr);
         let xxxd = xd.getDate();
+        let xdd = new Date(x.getFullYear(), x.getMonth(), x.getDate() + i);
+        let wkNum = getWeekNumber(xdd);
+        //console.log(wkNum);
 
         if (i == 0) {
-          cell.id = `week#${j + 1}`;
-          cell.innerHTML = j + 1;
+          cell.id = `week#${wkNum}`;
+          cell.innerHTML = wkNum;
           cell.style =
             'text-align: center; font-size:24px; color:white; background:#4abf8a';
         } else {
@@ -151,8 +99,7 @@ const wCal = {
   }
 };
 
+//call calendar() when page load
 window.onload = function() {
-  //call calendar() when page load
-  // wCal.calendarHelp();
-  wCal.createWeek();
+  wCal.createCal();
 };
