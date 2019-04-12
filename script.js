@@ -57,19 +57,21 @@ const wCal = {
     return new Date(fyD.getTime() + noOfWeeks - days);
   },
   createCal() {
-    for (let j = 0; j < 5; j++) {
+    let b = [];
+    for (let j = 0; j < 100; j++) {
       let x = this.mondayFromWeekNumber(j + 1, 2019);
 
       //Set the parent element
-      let week = document.createElement('div');
-      week.className = 'week';
-      week.id = `week_${j + 1}`;
+      // let week = document.createElement('div');
+      // week.className = 'week';
+      // week.id = `week_${j + 1}`;
 
+      let a = [];
       // Create the inner elems before appending to parent
       for (let i = 0; i < 8; i++) {
         //Set the child element
-        let cell = document.createElement('div');
-        cell.className = 'cell';
+        // let cell = document.createElement('div');
+        // cell.className = 'cell';
 
         let xd = new Date(x.getFullYear(), x.getMonth(), x.getDate() + i - 1);
         let xxd = xd.toLocaleDateString(localeStr);
@@ -79,20 +81,25 @@ const wCal = {
         //console.log(wkNum);
 
         if (i == 0) {
-          cell.id = `week#${wkNum}`;
-          cell.innerHTML = wkNum;
-          cell.style =
-            'text-align: center; font-size:24px; color:white; background:#4abf8a';
+          a.push(
+            `<div class="cell" id="week#${wkNum}" style="text-align: center; font-size:24px; color:white; background:#4abf8a">${wkNum}</div>`
+          );
+          // cell.id = ``;
+          // cell.innerHTML = wkNum;
+          // cell.style =
+          //   '';
         } else {
-          cell.id = `${xxd}`;
-          cell.innerHTML = xxxd;
+          a.push(`<div class="cell" id="${xxd}" >${xxxd}</div>`);
+          // cell.id = `${xxd}`;
+          // cell.innerHTML = xxxd;
         }
 
         // append to parent
-        week.appendChild(cell);
+        //week.innerHTML = a.join('');
       }
+      b.push(`<div class="week" id="week_${j + 1}" >${a.join('')}</div>`);
       //append to DOM div
-      document.getElementsByClassName('calendar')[0].appendChild(week);
+      document.getElementsByClassName('calendar')[0].innerHTML = b.join('');
     }
   }
 };

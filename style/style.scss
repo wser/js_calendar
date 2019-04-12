@@ -1,40 +1,30 @@
 $font-stack: Verdana, Arial, sans-serif;
 $primary-color: #4abf8a;
 
-.ccontainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-content: center;
-  width: 200px;
-  background-color: $primary-color;
-  color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 4px 4px 0 rgba(50, 50, 50, 0.4);
-
-  & > div {
-    font-family: $font-stack;
-    padding: 5px 5px;
-    margin: 0;
-  }
-}
-
 .calendar {
-  max-width: 560px;
+  max-width: 400px;
   margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 
   .week {
+    height: 100%;
     display: flex;
-    height: 80px;
 
     .cell {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
       flex-grow: 1;
       flex-shrink: 1;
       flex-basis: 0;
       color: $primary-color;
       padding: 5px;
-      background-color: transparentize(white, 0.3);
+      //sbackground-color: transparentize(white, 0.3);
       box-shadow: -1px -1px $primary-color, inset -1px -1px 0 0 $primary-color;
     }
   }
