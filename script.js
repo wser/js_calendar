@@ -81,8 +81,9 @@ const wCal = {
                 month.getFullYear()}</div>`);
         } else {
           week.push(`<div 
-              class="cell" 
-              id="${xd.toLocaleDateString(localeStr)}" >${xd.getDate()}</div>`);
+              class="cell day"
+              onclick="showIt(this)"
+              id="${xd.toLocaleDateString(localeStr)}">${xd.getDate()}</div>`);
         }
       }
       calendar.push(
@@ -96,6 +97,10 @@ const wCal = {
     document.getElementById('loading').style.display = 'none';
   }
 };
+
+function showIt(element) {
+  alert(element.id);
+}
 
 //call calendar() when page load
 window.onload = function() {
@@ -114,5 +119,6 @@ window.onload = function() {
       'afterbegin',
       `<div class="week header">${wkDays.join('')}</div>`
     );
+
   console.log('Load time: ', (Date.now() - timerStart) / 1000, 'seconds');
 };
