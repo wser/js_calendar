@@ -1,6 +1,6 @@
 .calendar {
   max-width: 400px;
-  margin: 20px auto;
+  margin: 70px auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,5 +47,11 @@
   padding: 5px;
   -webkit-box-shadow: -1px -1px #4abf8a, inset -1px -1px 0 0 #4abf8a;
           box-shadow: -1px -1px #4abf8a, inset -1px -1px 0 0 #4abf8a;
+}
+
+.calendar .week.header {
+  position: fixed;
+  top: 20px;
+  width: 400px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -3,7 +3,7 @@ $primary-color: #4abf8a;
 
 .calendar {
   max-width: 400px;
-  margin: 20px auto;
+  margin: 70px auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -27,6 +27,12 @@ $primary-color: #4abf8a;
       padding: 5px;
       //sbackground-color: transparentize(white, 0.3);
       box-shadow: -1px -1px $primary-color, inset -1px -1px 0 0 $primary-color;
+    }
+
+    &.header {
+      position: fixed;
+      top: 20px;
+      width: 400px;
     }
   }
 }
