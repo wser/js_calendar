@@ -101,11 +101,11 @@ const wCal = {
         ''
       );
     }
+    document.getElementById('loading').style.display = 'none';
   }
 };
 
 //call calendar() when page load
 window.onload = function() {
   wCal.createCal();
-  document.getElementById('loading').style.display = 'none';
 };
