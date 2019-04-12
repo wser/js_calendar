@@ -1,5 +1,5 @@
 .calendar {
-  max-width: 400px;
+  max-width: 60vw;
   margin: 70px auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -54,6 +54,6 @@
   z-index: 0;
   position: fixed;
   top: 20px;
-  width: 400px;
+  width: 60vw;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,8 +1,9 @@
 $font-stack: Verdana, Arial, sans-serif;
 $primary-color: #4abf8a;
+$main-width: 60vw;
 
 .calendar {
-  max-width: 400px;
+  max-width: $main-width;
   margin: 70px auto;
   display: flex;
   justify-content: center;
@@ -34,7 +35,7 @@ $primary-color: #4abf8a;
       z-index: 0;
       position: fixed;
       top: 20px;
-      width: 400px;
+      width: $main-width;
     }
   }
 }
