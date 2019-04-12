@@ -47,7 +47,7 @@
   padding: 5px;
   -webkit-box-shadow: -1px -1px #4abf8a, inset -1px -1px 0 0 #4abf8a;
           box-shadow: -1px -1px #4abf8a, inset -1px -1px 0 0 #4abf8a;
-  z-index: 1;
+  z-index: 0;
 }
 
 .calendar .week.header {

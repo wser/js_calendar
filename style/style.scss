@@ -27,7 +27,7 @@ $primary-color: #4abf8a;
       padding: 5px;
       //sbackground-color: transparentize(white, 0.3);
       box-shadow: -1px -1px $primary-color, inset -1px -1px 0 0 $primary-color;
-      z-index: 1;
+      z-index: 0;
     }
 
     &.header {
