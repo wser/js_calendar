@@ -1,4 +1,5 @@
 const localeStr = 'sv-SE';
+const year = 2019;
 const weekdays = [
   'Sunday',
   'Monday',
@@ -57,49 +58,48 @@ const wCal = {
     return new Date(fyD.getTime() + noOfWeeks - days);
   },
   createCal() {
-    let b = [];
+    //Set the parent element
+    let calendar = [];
     for (let j = 0; j < 100; j++) {
-      let x = this.mondayFromWeekNumber(j + 1, 2019);
+      let x = this.mondayFromWeekNumber(j + 1, year);
 
-      //Set the parent element
-      // let week = document.createElement('div');
-      // week.className = 'week';
-      // week.id = `week_${j + 1}`;
-
-      let a = [];
+      //Set the child element
+      let week = [];
       // Create the inner elems before appending to parent
       for (let i = 0; i < 8; i++) {
-        //Set the child element
-        // let cell = document.createElement('div');
-        // cell.className = 'cell';
-
         let xd = new Date(x.getFullYear(), x.getMonth(), x.getDate() + i - 1);
-        let xxd = xd.toLocaleDateString(localeStr);
-        let xxxd = xd.getDate();
-        let xdd = new Date(x.getFullYear(), x.getMonth(), x.getDate() + i);
-        let wkNum = this.getWeekNumber(xdd);
+
+        let wkNum = this.getWeekNumber(
+          new Date(x.getFullYear(), x.getMonth(), x.getDate() + i)
+        );
         //console.log(wkNum);
 
         if (i == 0) {
-          a.push(
-            `<div class="cell" id="week#${wkNum}" style="text-align: center; font-size:24px; color:white; background:#4abf8a">${wkNum}</div>`
-          );
-          // cell.id = ``;
-          // cell.innerHTML = wkNum;
-          // cell.style =
-          //   '';
+          week.push(`
+            <div 
+              class="cell" 
+              id="week#${wkNum}" 
+              style="font-size:18px; color:white; background:#4abf8a">
+              ${x.getFullYear() + ': ' + wkNum}
+            </div>
+          `);
         } else {
-          a.push(`<div class="cell" id="${xxd}" >${xxxd}</div>`);
-          // cell.id = `${xxd}`;
-          // cell.innerHTML = xxxd;
+          week.push(`
+            <div 
+              class="cell" 
+              id="${xd.toLocaleDateString(localeStr)}" >
+              ${xd.getDate()}
+            </div>
+          `);
         }
-
-        // append to parent
-        //week.innerHTML = a.join('');
       }
-      b.push(`<div class="week" id="week_${j + 1}" >${a.join('')}</div>`);
+      calendar.push(
+        `<div class="week" id="week_${j + 1}" >${week.join('')}</div>`
+      );
       //append to DOM div
-      document.getElementsByClassName('calendar')[0].innerHTML = b.join('');
+      document.getElementsByClassName('calendar')[0].innerHTML = calendar.join(
+        ''
+      );
     }
   }
 };
@@ -107,4 +107,5 @@ const wCal = {
 //call calendar() when page load
 window.onload = function() {
   wCal.createCal();
+  document.getElementById('loading').style.display = 'none';
 };

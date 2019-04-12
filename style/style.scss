@@ -16,6 +16,7 @@ $primary-color: #4abf8a;
     .cell {
       height: 40px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       flex-direction: column;
       text-align: center;
