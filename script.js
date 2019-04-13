@@ -66,11 +66,13 @@ const wCal = {
         let month = new Date(x.getFullYear(), x.getMonth(), x.getDate() + 6);
 
         if (i == 0) {
+          //add weeknumbers
           week.push(`<div 
               class="cell" 
               id="week#${wkNum}" 
               style="font-size:18px; color:white; background:#4abf8a">${wkNum}</div>`);
         } else if (i == 8) {
+          // month and year
           week.push(`<div 
               class="cell" 
               id="month#${months[month]}" 
@@ -80,21 +82,19 @@ const wCal = {
                 ', ' +
                 month.getFullYear()}</div>`);
         } else {
+          // days
           week.push(`<div 
               class="cell day"
               onclick="showIt(this)"
               id="${xd.toLocaleDateString(localeStr)}">${xd.getDate()}</div>`);
         }
       }
+      // add every week to calendar array
       calendar.push(
         `<div class="week" id="week_${j + 1}" >${week.join('')}</div>`
       );
-
-      // let content = calendar.join('');
-      // //append to DOM div
-      // document.querySelector('.calendar').innerHTML = content;
     }
-    document.getElementById('loading').style.display = 'none';
+    // fill clusterize with data
     var clusterize = new Clusterize({
       rows: calendar,
       scrollId: 'scrollArea',
@@ -111,6 +111,7 @@ function showIt(element) {
 window.onload = function() {
   var timerStart = Date.now();
   wCal.createCal();
+  // add headers after loading content
   wkDays = [];
   for (let i = 0; i < weekdays.length; i++) {
     wkDays.push(`<div 
@@ -119,7 +120,7 @@ window.onload = function() {
               style="color:white; background:#4abf8a">${weekdays[i]}</div>`);
   }
   document
-    .querySelector('.calendar')
+    .querySelector('.clusterize-content')
     .insertAdjacentHTML(
       'afterbegin',
       `<div class="week header">${wkDays.join('')}</div>`

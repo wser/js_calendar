@@ -2,7 +2,38 @@ $font-stack: Verdana, Arial, sans-serif;
 $primary-color: #4abf8a;
 $main-width: 60vw;
 
-.calendar {
+/* max-height - the only parameter in this file that needs to be edited.
+ * Change it to suit your needs. The rest is recommended to leave as is.
+ */
+.clusterize-scroll {
+  max-height: 80 vh;
+  overflow: auto;
+}
+
+/**
+ * Avoid vertical margins for extra tags
+ * Necessary for correct calculations when rows have nonzero vertical margins
+ */
+.clusterize-extra-row {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* By default extra tag .clusterize-keep-parity added to keep parity of rows.
+ * Useful when used :nth-child(even/odd)
+ */
+.clusterize-extra-row.clusterize-keep-parity {
+  display: none;
+}
+
+/* During initialization clusterize adds tabindex to force the browser to keep focus
+ * on the scrolling list, see issue #11
+ * Outline removes default browser's borders for focused elements.
+ */
+.clusterize-content {
+  outline: 0;
+  counter-reset: clusterize-counter;
+
   max-width: $main-width;
   margin: 70px auto;
   display: flex;
@@ -38,46 +69,6 @@ $main-width: 60vw;
       width: $main-width;
     }
   }
-}
-
-/* max-height - the only parameter in this file that needs to be edited.
- * Change it to suit your needs. The rest is recommended to leave as is.
- */
-.clusterize-scroll {
-  max-height: 200px;
-  overflow: auto;
-
-  max-width: $main-width;
-  margin: 70px auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-/**
- * Avoid vertical margins for extra tags
- * Necessary for correct calculations when rows have nonzero vertical margins
- */
-.clusterize-extra-row {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-/* By default extra tag .clusterize-keep-parity added to keep parity of rows.
- * Useful when used :nth-child(even/odd)
- */
-.clusterize-extra-row.clusterize-keep-parity {
-  display: none;
-}
-
-/* During initialization clusterize adds tabindex to force the browser to keep focus
- * on the scrolling list, see issue #11
- * Outline removes default browser's borders for focused elements.
- */
-.clusterize-content {
-  outline: 0;
-  counter-reset: clusterize-counter;
 }
 
 /* Centering message that appears when no data provided
