@@ -2,8 +2,10 @@
 <html>
   <head>
     <title>Calendar</title>
-    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style/clusterize.css" />
+    <script src="./clusterize.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./style/style.css" />
+    <script type="text/javascript" src="script.js"></script>
   </head>
   <body>
     <div id="loading">
@@ -17,5 +19,10 @@
       <p>- get selected date</p>
     </div>
     <div class="calendar"></div>
+    <div id="scrollArea" class="clusterize-scroll">
+      <div id="contentArea" class="clusterize-content">
+        <div class="clusterize-no-data">Loading data…</div>
+      </div>
+    </div>
   </body>
 </html>

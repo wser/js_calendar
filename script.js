@@ -48,29 +48,38 @@ const wCal = {
     return new Date(fyD.getTime() + noOfWeeks - days); // returns start of year plus nuOfweeks minus days in week
   },
   createCal() {
+    // first week of the year
+    let firstDayOfTheYear = this.mondayFromWeekNumber(1, year);
+    let x = firstDayOfTheYear;
+    let xd = new Date(x.getFullYear(), x.getMonth(), x.getDate());
+    let wkNum = this.getWeekNumber(xd);
+    let lastDayOfTheYear = new Date(year, 11, 28);
+    let lastWeekInYear = this.getWeekNumber(lastDayOfTheYear);
+    console.log(1);
+
+    let month = new Date(x.getFullYear(), x.getMonth(), x.getDate() + 6);
+
     //Set the parent element
     let calendar = [];
-    for (let j = 0; j < displayWeeks; j++) {
-      let x = this.mondayFromWeekNumber(j + 1, year);
-
+    let k = 0;
+    for (let j = 1; j < displayWeeks; j++) {
+      k++;
+      if (j > lastWeekInYear) {
+        k++;
+      }
       //Set the child element
       let week = [];
       // Create the inner elems before appending to parent
       for (let i = 0; i < 9; i++) {
-        let xd = new Date(x.getFullYear(), x.getMonth(), x.getDate() + i - 1);
-
-        let wkNum = this.getWeekNumber(
-          new Date(x.getFullYear(), x.getMonth(), x.getDate() + i)
-        );
-
-        let month = new Date(x.getFullYear(), x.getMonth(), x.getDate() + 6);
-
         if (i == 0) {
+          //week number
           week.push(`<div 
               class="cell" 
-              id="week#${wkNum}" 
-              style="font-size:18px; color:white; background:#4abf8a">${wkNum}</div>`);
+              id="week#${wkNum + k}" 
+              style="font-size:18px; color:white; background:#4abf8a">${wkNum +
+                k}</div>`);
         } else if (i == 8) {
+          // month and year
           week.push(`<div 
               class="cell" 
               id="month#${months[month]}" 
@@ -80,6 +89,7 @@ const wCal = {
                 ', ' +
                 month.getFullYear()}</div>`);
         } else {
+          //days
           week.push(`<div 
               class="cell day"
               onclick="showIt(this)"
@@ -87,14 +97,21 @@ const wCal = {
         }
       }
       calendar.push(
-        `<div class="week" id="week_${j + 1}" >${week.join('')}</div>`
+        `<div class="week" id="week_${k + 1}" >${week.join('')}</div>`
       );
 
-      let content = calendar.join('');
+      //let content = calendar.join('');
+
       //append to DOM div
-      document.querySelector('.calendar').innerHTML = content;
+      //document.querySelector('.calendar').innerHTML = content;
     }
     document.getElementById('loading').style.display = 'none';
+
+    var clusterize = new Clusterize({
+      rows: calendar,
+      scrollId: 'scrollArea',
+      contentId: 'contentArea'
+    });
   }
 };
 
@@ -106,6 +123,7 @@ function showIt(element) {
 window.onload = function() {
   var timerStart = Date.now();
   wCal.createCal();
+  // append header for calendar
   wkDays = [];
   for (let i = 0; i < weekdays.length; i++) {
     wkDays.push(`<div 
