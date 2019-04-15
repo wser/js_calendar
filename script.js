@@ -1,6 +1,21 @@
 const localeStr = 'sv-SE';
-const year = 2019;
-const displayWeeks = 70;
+// const year = 2019;
+// let yrwkNum = getWeekNumber(new Date(year, 11, 28));
+
+let year = e => {
+  return {
+    value: e,
+    prevMaxWk() {
+      return getWeekNumber(new Date(this.value - 1, 11, 28));
+    },
+    maxWk() {
+      return getWeekNumber(new Date(this.value, 11, 28));
+    }
+  };
+};
+// console.log(year(2010).prevMaxWk());
+
+const displayWeeks = year(2019).maxWk() + 1;
 
 const weekdays = [
   'wk',
@@ -28,17 +43,19 @@ const months = [
   'Dec'
 ];
 
+function getWeekNumber(d) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Copy date so don't modify original
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Set to nearest Thursday: current date + 4 - current day number // Make Sunday's day number 7
+  return Math.ceil(
+    ((d - new Date(Date.UTC(d.getUTCFullYear(), 0, 1))) / 86400000 + 1) / 7 // Calculate full weeks to nearest Thursday
+  );
+}
+
 const wCal = {
   isOdd(x) {
     return x & 1;
   },
-  getWeekNumber(d) {
-    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Copy date so don't modify original
-    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Set to nearest Thursday: current date + 4 - current day number // Make Sunday's day number 7
-    return Math.ceil(
-      ((d - new Date(Date.UTC(d.getUTCFullYear(), 0, 1))) / 86400000 + 1) / 7 // Calculate full weeks to nearest Thursday
-    );
-  },
+
   mondayFromWeekNumber(week, y) {
     y = typeof y !== 'undefined' ? y : new Date().getFullYear(); // sets default year to current if undefined
     let fyD = new Date(y, 0, 1); // sets date of first in year
@@ -50,11 +67,12 @@ const wCal = {
     let days = 3600000 * 24 * res * (fyInWeek - 1); // number of days in miliseconds
     return new Date(fyD.getTime() + noOfWeeks - days); // returns start of year plus nuOfweeks minus days in week
   },
+
   createCal() {
     //Set the parent element
     let calendar = [];
     for (let j = 0; j < displayWeeks; j++) {
-      let x = this.mondayFromWeekNumber(j + 1, year);
+      let x = this.mondayFromWeekNumber(j + 1, year.value);
 
       //Set the child element
       let week = [];
@@ -62,7 +80,7 @@ const wCal = {
       for (let i = 0; i < 9; i++) {
         let xd = new Date(x.getFullYear(), x.getMonth(), x.getDate() + i - 1);
 
-        let wkNum = this.getWeekNumber(
+        let wkNum = getWeekNumber(
           new Date(x.getFullYear(), x.getMonth(), x.getDate() + i)
         );
 
@@ -103,11 +121,13 @@ const wCal = {
       );
     }
     // fill clusterize with data
-    var clusterize = new Clusterize({
-      rows: calendar,
+    let clusterize = new Clusterize({
+      // rows: calendar,
       scrollId: 'scrollArea',
       contentId: 'contentArea'
     });
+
+    clusterize.update(calendar);
   }
 };
 
