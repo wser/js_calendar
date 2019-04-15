@@ -80,6 +80,11 @@
   z-index: 0;
 }
 
+.clusterize-content .week .odd {
+  background: #4abf8a;
+  color: #fff;
+}
+
 .clusterize-content .week.header {
   z-index: 0;
   position: fixed;

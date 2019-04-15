@@ -29,6 +29,9 @@ const months = [
 ];
 
 const wCal = {
+  isOdd(x) {
+    return x & 1;
+  },
   getWeekNumber(d) {
     d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Copy date so don't modify original
     d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Set to nearest Thursday: current date + 4 - current day number // Make Sunday's day number 7
@@ -83,8 +86,13 @@ const wCal = {
                 month.getFullYear()}</div>`);
         } else {
           // days
-          week.push(`<div 
+          this.isOdd(xd.getMonth())
+            ? week.push(`<div 
               class="cell day"
+              onclick="showIt(this)"
+              id="${xd.toLocaleDateString(localeStr)}">${xd.getDate()}</div>`)
+            : week.push(`<div 
+              class="cell day odd"
               onclick="showIt(this)"
               id="${xd.toLocaleDateString(localeStr)}">${xd.getDate()}</div>`);
         }
